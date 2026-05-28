@@ -1,8 +1,8 @@
-name: Claim Games
+name: Ultimate Auto Claimer
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 18 * * *'
+    - cron: '30 17 * * 4'
 
 jobs:
   claim:
@@ -13,8 +13,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - name: Run Claimer
+      - name: Run Background Claimer
         run: node epic-games
         env:
           EMAIL: ${{ secrets.EPIC_EMAIL }}
-          PASSWORD: ${{ secrets.EPIC_PASSWORD }}
+          PASSWORD: "63c15c30054643e39140fffac1325fa2"
