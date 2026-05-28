@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: node src/index.js
+      - run: npm start
         env:
           EPIC_EMAIL: ${{ secrets.EPIC_EMAIL }}
           EPIC_PASSWORD: ${{ secrets.EPIC_PASSWORD }}
