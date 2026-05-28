@@ -13,8 +13,14 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: node epic-games
+      - name: Run Clamer
+        run: node epic-games
         env:
           EMAIL: ${{ secrets.EPIC_EMAIL }}
           PASSWORD: ${{ secrets.EPIC_PASSWORD }}
-          
+      - name: Upload Screenshot if failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: epic-login-screenshot
+          path: data/browser/
