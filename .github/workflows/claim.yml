@@ -1,0 +1,20 @@
+name: Claim Games
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 18 * * *'
+
+jobs:
+  claim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: node out/index.js
+        env:
+          EPIC_EMAIL: ${{ secrets.EPIC_EMAIL }}
+          EPIC_PASSWORD: ${{ secrets.EPIC_PASSWORD }}
