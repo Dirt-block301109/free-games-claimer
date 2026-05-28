@@ -1,6 +1,8 @@
 name: Claim Games
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 18 * * *'
 
 jobs:
   claim:
@@ -11,5 +13,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - name: Run Device Flow
-        run: node epic-games --device-flow
+      - name: Run Claimer
+        run: node epic-games
+        env:
+          EMAIL: ${{ secrets.EPIC_EMAIL }}
+          PASSWORD: ${{ secrets.EPIC_PASSWORD }}
